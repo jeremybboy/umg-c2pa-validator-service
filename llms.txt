@@ -1,0 +1,11 @@
+# UMG C2PA Validator Service
+
+Local macOS demonstration: real C2PA inspection alongside clearly simulated music-intake modules.
+
+- [Source and quick start](https://github.com/jeremybboy/umg-c2pa-validator-service)
+- [Architecture](docs/architecture.md)
+- [Agent contract](AGENTS.md)
+- [Contribution guide](CONTRIBUTING.md)
+- [Security](SECURITY.md)
+
+AI detection and DDEX are illustrative. Never infer AI use from missing credentials or confuse test-anchor trust with production trust.

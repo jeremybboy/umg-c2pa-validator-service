@@ -1,0 +1,10 @@
+# UMG C2PA Validator Service
+
+Local Mac demonstration of C2PA inspection in a music-intake workflow.
+
+- [Source and quick start](https://github.com/jeremybboy/umg-c2pa-validator-service)
+- [Architecture](https://github.com/jeremybboy/umg-c2pa-validator-service/blob/main/docs/architecture.md)
+- [Agent contract](https://github.com/jeremybboy/umg-c2pa-validator-service/blob/main/AGENTS.md)
+- [Security](https://github.com/jeremybboy/umg-c2pa-validator-service/blob/main/SECURITY.md)
+
+AI analysis is simulated; DDEX is illustrative. Test trust is explicitly labelled.
