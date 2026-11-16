@@ -11,7 +11,7 @@ Demonstrate a real Content Credentials reader as one inspection module in a fami
 | Layer | Change and boundary |
 | --- | --- |
 | Starting point | New public repository; bootstrap contains documentation/governance only. |
-| User-visible behavior | Local audio intake/preview, three real validation checks, manifest display, navigable history, explicit Test Mode. |
+| User-visible behavior | Local audio intake/preview, three real validation checks, manifest display, navigable history, explicit Test Mode and a visual How it works explanation. |
 | Code | Framework-independent Node reader/report mapper; Electron broker/worker; static local renderer under `frontend/`. |
 | Illustrative modules | AI results are scripted and visibly simulated; DDEX is an empty placeholder. |
 | Data / persistence | Selected media and test policy remain session-local; explicit report export only. Supplied media stays outside Git. |
@@ -28,6 +28,7 @@ Demonstrate a real Content Credentials reader as one inspection module in a fami
 4. Show a connected ingredient tree with pan/zoom/fit/branch expansion and full declared actions/tools in details; preserve raw SDK JSON.
 5. Supply an AI-detection simulation that does not read its result from C2PA or claim actual detection; leave DDEX illustrative.
 6. Package a Mac app with its own runtime so opening it does not require launching a web server.
+7. Explain our reusable Node service versus the existing Rust-backed C2PA SDK in a minimal **How it works** tab between Content Credentials and AI Detection, with optional implementation detail.
 
 ## Acceptance
 

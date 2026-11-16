@@ -23,6 +23,7 @@
     <p id="app-message" class="message" role="status" aria-live="polite"></p>
     <nav class="module-tabs" aria-label="Intake inspection modules" role="tablist">
       <button id="tab-credentials" role="tab" aria-selected="true" aria-controls="credentials-panel" data-tab="credentials">Content Credentials <span class="module-tag">C2PA</span></button>
+      <button id="tab-how" role="tab" aria-selected="false" aria-controls="how-panel" data-tab="how" tabindex="-1">How it works</button>
       <button id="tab-ai" role="tab" aria-selected="false" aria-controls="ai-panel" data-tab="ai" tabindex="-1">AI Detection <span class="module-tag simulated">Simulated</span></button>
       <button id="tab-ddex" role="tab" aria-selected="false" aria-controls="ddex-panel" data-tab="ddex" tabindex="-1">DDEX <span class="module-tag">Placeholder</span></button>
     </nav>
@@ -40,6 +41,32 @@
           <p class="graph-help">Drag / scroll to pan · pinch / Command-scroll to zoom · click an audio card for details</p>
         </div>
       </section>
+    </section>
+    <section id="how-panel" role="tabpanel" aria-labelledby="tab-how" hidden>
+      <div class="section-heading"><div><p class="eyebrow">THE INTEGRATION, EXPLAINED</p><h2>One reader library. Clear evidence.</h2></div></div>
+      <p class="how-intro">The intake app hands a file to an existing open-source C2PA SDK, then displays its results.</p>
+      <ol class="reader-flow" aria-label="From the intake app to C2PA validation and results">
+        <li class="flow-app"><span class="eyebrow">01 / YOUR INTAKE APP</span><h3>Select the audio</h3><div class="flow-audio" aria-hidden="true"><svg viewBox="0 0 180 44"><path d="M0 22h18m4-7v14m6-22v30m6-15v1m6-13v24m6-29v34m6-23v12m6-7h20m6-9v18m6-29v40m6-30v20m6-12v4m6-8v12m6-18v24m6-15v6m6-3h30"/></svg></div><p>A local WAV or MP3, with its manifest when present.</p><span class="flow-language">JavaScript · Electron window</span></li>
+        <li class="flow-service"><span class="eyebrow">02 / OUR REUSABLE CODE</span><h3>Call the reader</h3><code class="flow-call">inspectFile(file)</code><p>Choose the trust policy and pass the audio to the SDK.</p><span class="flow-language">JavaScript · Node.js service</span></li>
+        <li class="flow-sdk"><span class="eyebrow">03 / EXISTING OPEN-SOURCE SDK</span><h3>Read and validate</h3><code class="sdk-package">@contentauth/c2pa-node</code><span class="rust-core">Rust core · c2pa-rs</span><p>The library reads the manifest and performs the cryptographic checks.</p></li>
+        <li class="flow-result"><span class="eyebrow">04 / BACK TO YOUR APP</span><h3>Display the evidence</h3><ul class="flow-output"><li>Binding</li><li>Signature</li><li>Signer trust</li></ul><p>A structured report and declared ingredient history.</p></li>
+      </ol>
+      <section class="sdk-checks" aria-labelledby="sdk-checks-title">
+        <h3 id="sdk-checks-title">Inside the library</h3>
+        <div class="sdk-check-columns">
+          <div><h4>Content binding</h4><p>Recompute the protected-content hash.<br>Compare it with the manifest’s binding.</p></div>
+          <div><h4>Claim signature</h4><p>Verify the signature on the claim.<br>Use the signer’s public key.</p></div>
+          <div><h4>Signer trust</h4><p>Check the certificate chain.<br>Apply the selected trust policy.</p></div>
+        </div>
+      </section>
+      <div class="reuse-note"><p><strong>Reusable outside this Mac window.</strong> Another intake service can consume the same inspection report.</p><code>const report = await inspectFile(file);</code></div>
+      <details class="how-details"><summary>Under the hood</summary><div class="how-detail-copy">
+        <p><strong>Library used here:</strong> <code>@contentauth/c2pa-node</code> 0.12.0 from the Content Authenticity Initiative, backed by the native Rust implementation <code>c2pa-rs</code>.</p>
+        <p>Our <code>src/validator/service.mjs</code> calls <code>Reader.fromAsset({ path: file, mimeType }, context)</code>. The SDK validates; our report mapper formats its evidence for the interface.</p>
+        <p><strong>Other language options:</strong> the CAI SDK family also offers Python and C/C++ libraries backed by its Rust core. This app uses the Node.js library; those other bindings are alternative integration choices.</p>
+        <p><strong>Test Mode:</strong> adds the bundled public test root to the selected trust policy. Content-binding and signature verification remain enabled.</p>
+        <p class="subtle">SDK reference: opensource.contentauthenticity.org/docs/introduction/</p>
+      </div></details>
     </section>
     <section id="ai-panel" role="tabpanel" aria-labelledby="tab-ai" hidden>
       <div class="section-heading"><div><p class="eyebrow">ILLUSTRATIVE INTAKE MODULE</p><h2>AI Detection</h2></div><span class="pill simulated">Simulation</span></div>

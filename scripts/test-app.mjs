@@ -20,12 +20,23 @@ try {
   page.on('pageerror', error => errors.push(error.message));
   await page.locator('#choose-audio').waitFor();
   await page.screenshot({ path: 'artifacts/ui/intake.png', fullPage: true });
+  await page.locator('#tab-credentials').focus();
+  await page.keyboard.press('ArrowRight');
+  assert.equal(await page.locator('#tab-how').getAttribute('aria-selected'), 'true');
+  assert.match(await page.locator('#how-panel').textContent(), /@contentauth\/c2pa-node/);
+  assert.match(await page.locator('#how-panel').textContent(), /Rust core/);
+  await page.screenshot({ path: 'artifacts/ui/how-it-works.png', fullPage: true });
+  await page.locator('#tab-credentials').click();
   assert.equal(await page.evaluate(() => typeof window.require), 'undefined');
   assert.equal(await page.locator('#test-mode').isChecked(), false);
   await page.locator('#file-input').setInputFiles(unsigned);
   await page.waitForFunction(() => document.getElementById('validation-summary').textContent.includes('No embedded'), { timeout: 30000 });
   assert.equal(await page.locator('.check-state').allTextContents().then(a => a.join(',')), 'N/A,N/A,N/A');
   await page.waitForFunction(() => document.getElementById('audio').readyState >= 1);
+  const checksBeforeGuide = await page.locator('.check-state').allTextContents();
+  await page.locator('#tab-how').click();
+  await page.locator('#tab-credentials').click();
+  assert.deepEqual(await page.locator('.check-state').allTextContents(), checksBeforeGuide);
   await page.locator('#test-mode').check();
   await page.waitForFunction(() => document.querySelector('[data-check=trust] .check-state').textContent === 'N/A');
   assert.equal(await page.locator('#mode-badge').isVisible(), true);
@@ -58,9 +69,12 @@ try {
     await page.waitForFunction(() => document.querySelector('[data-check=trust] .check-state').textContent === 'FAIL');
   }
   await electron.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].setSize(1000, 760));
+  await page.locator('#tab-how').click();
+  await page.screenshot({ path: 'artifacts/ui/local-how-minimum-width.png', fullPage: true });
+  assert.ok(await page.locator('.reader-flow').evaluate(el => [...el.querySelectorAll('li > code')].every(code => code.scrollWidth <= code.clientWidth + 1)));
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   assert.deepEqual(errors, []);
-  console.log('Packaged Mac app: ingest, SDK inspection, preview metadata, renderer isolation, simulation, DDEX and unsigned Test Mode passed.');
+  console.log('Packaged Mac app: ingest, SDK inspection, preview metadata, renderer isolation, How it works navigation, simulation, DDEX and unsigned Test Mode passed.');
   console.log(process.env.C2PA_TEST_ASSET ? 'Supplied signed asset: default/test trust, raw manifest and graph interactions passed.'
     : 'Signed-asset trust and graph interactions skipped: C2PA_TEST_ASSET is unset.');
 } finally { await electron.close(); }

@@ -28,16 +28,18 @@ App-test screenshots go to ignored `artifacts/ui/`; signed-file captures and exp
 3. Enable **Test Mode** for a file signed under the shared test root. Expect a dashed green trust result labelled **test certificate used**; switch it off to compare defaults.
 4. Expand the graph. Pan, zoom, Fit, collapse a branch and select ingredients to view full titles, actions, tools and source declarations.
 5. View the raw manifest and optionally export the local JSON report.
-6. Open AI Detection and run its simulation. Its result must say **Simulated**; switching tabs must not alter C2PA evidence.
-7. Open DDEX. It is a visibly empty illustrative placeholder.
-8. Try unsigned and malformed audio. No credentials and inspection errors must remain distinct; neither implies an AI verdict.
-9. Quit and reopen: Test Mode starts off and no previous audio file is reopened automatically.
+6. Open **How it works**, between Content Credentials and AI Detection. Follow audio → our Node service → existing Rust-backed SDK → report; expand **Under the hood**, then return and confirm the validation results are unchanged.
+7. Open AI Detection and run its simulation. Its result must say **Simulated**; switching tabs must not alter C2PA evidence.
+8. Open DDEX. It is a visibly empty illustrative placeholder.
+9. Try unsigned and malformed audio. No credentials and inspection errors must remain distinct; neither implies an AI verdict.
+10. Quit and reopen: Test Mode starts off and no previous audio file is reopened automatically.
 
 ## Suggested 40-second recording
 
 - 0–8 seconds: show the intake screen and drop the audio file.
-- 8–20 seconds: show the three checks, enable Test Mode and point to the explicit test-certificate label.
-- 20–32 seconds: expand the ingredient tree and select an ingredient.
-- 32–40 seconds: show the labelled AI simulation and DDEX placeholder as adjacent modules, then return to Content Credentials.
+- 8–18 seconds: show the three checks, enable Test Mode and point to the explicit test-certificate label.
+- 18–28 seconds: open **How it works** and show the existing SDK inside the integration flow.
+- 28–36 seconds: return to credentials, expand the ingredient tree and select an ingredient.
+- 36–40 seconds: show the labelled AI simulation and DDEX placeholder as adjacent modules.
 
 Takeaway: the real reader is one independent module in an illustrative intake workflow.

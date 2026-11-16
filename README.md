@@ -12,6 +12,10 @@ Drop WAV/MP3 audio, see its real Content Credentials and ingredient tree, and op
 
 ![Actual Mac application intake screen; no supplied audio or private metadata is shown.](docs/assets/intake.png)
 
+The **How it works** tab, between Content Credentials and AI Detection, explains the actual integration: JavaScript/Node.js → `@contentauth/c2pa-node` → its Rust `c2pa-rs` core → a structured report. A short visual flow separates our reusable service from the SDK and explains binding, signature and trust; implementation details remain collapsed.
+
+![How it works: local audio, reusable Node service, existing C2PA SDK and structured evidence.](docs/assets/how-it-works.png)
+
 ## Quick start
 
 Requires macOS and Node.js 22.12+ (Node 24 used for verification).

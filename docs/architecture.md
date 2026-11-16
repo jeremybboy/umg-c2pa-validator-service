@@ -12,6 +12,8 @@ Test Mode is explicit, off by default and session-only. It adds a fingerprint-ch
 
 AI detection returns a visibly simulated demonstration outcome. DDEX is an empty labelled placeholder. Neither influences real C2PA validation.
 
+The static **How it works** tab explains the JavaScript/Node.js integration and the native Rust core behind `@contentauth/c2pa-node`, following the [CAI SDK overview](https://opensource.contentauthenticity.org/docs/introduction/). It separates our `inspectFile` adapter/report mapping from SDK validation. Tab navigation performs no inspection and changes no validation policy or results; Python and C/C++ are described only as alternative SDK bindings.
+
 Supplied WAV/DOCX files remain outside source control. The wordmark is newly authored text, not an extracted corporate image. Dependencies, public test roots and borrowed code require license/source attribution.
 
 ## Reader contract
