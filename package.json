@@ -1,0 +1,22 @@
+{
+  "name": "umg-c2pa-validator-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local Mac music-intake demonstration with reusable C2PA inspection",
+  "type": "module",
+  "main": "src/desktop/main.mjs",
+  "license": "MIT",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "setup": "install-electron",
+    "start": "electron .",
+    "inspect": "node examples/inspect.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "build:mac": "node scripts/build-mac.mjs",
+    "open:mac": "node scripts/open-mac.mjs",
+    "test:app": "node scripts/test-app.mjs"
+  },
+  "dependencies": { "@contentauth/c2pa-node": "0.12.0" },
+  "devDependencies": { "@electron/packager": "20.3.0", "electron": "45.3.3", "playwright": "1.61.1" }
+}
